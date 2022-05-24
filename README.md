@@ -1,4 +1,6 @@
 # MADlayoutAssignmentPart1
+Instruction
+============
 The first part of MAD Class Layout Assignment.
 
 Create a Grid Layout of IoT (Internet of Things) devices in a particular house.
