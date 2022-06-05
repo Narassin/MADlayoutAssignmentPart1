@@ -23,22 +23,10 @@ class MainPage extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: const Text('My IoT Manager'),
-          backgroundColor: Color.fromARGB(255, 87, 87, 87),
+          backgroundColor: const Color.fromARGB(255, 87, 87, 87),
         ),
         body: Column(
-          children: [
-            TabBox(),
-            Expanded(
-                child: GridView.count(
-                    shrinkWrap: true,
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 10,
-                    children: List.generate(6, (index) {
-                      return Center(
-                        child: Text(iotDB[index]['deviceName'] as String),
-                      );
-                    })))
-          ],
+          children: [TabBox(), GridBox()],
         ));
   }
 }
