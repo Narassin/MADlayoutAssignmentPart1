@@ -22,7 +22,7 @@ class TabBox extends StatelessWidget {
       ),
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
       margin: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 20),
-      color: Colors.white30,
+      color: Color.fromARGB(255, 119, 119, 119),
     );
   }
 }

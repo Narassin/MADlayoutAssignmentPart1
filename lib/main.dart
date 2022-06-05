@@ -25,23 +25,20 @@ class MainPage extends StatelessWidget {
           title: const Text('My IoT Manager'),
           backgroundColor: Color.fromARGB(255, 87, 87, 87),
         ),
-        body: Container(
-          height: 1920,
-          color: Color.fromARGB(255, 49, 49, 49),
-          child: Column(
-            children: [
-              TabBox(),
-              GridView.count(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                  children: List.generate(6, (index) {
-                    return Center(
-                      child: Text(iotDB[index]['devicename'] as String),
-                    );
-                  }))
-            ],
-          ),
+        body: Column(
+          children: [
+            TabBox(),
+            Expanded(
+                child: GridView.count(
+                    shrinkWrap: true,
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    children: List.generate(6, (index) {
+                      return Center(
+                        child: Text(iotDB[index]['deviceName'] as String),
+                      );
+                    })))
+          ],
         ));
   }
 }
