@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'griddb.dart';
+import 'package:flutter_grid_button/flutter_grid_button.dart';
 
+//tab row widget to hold the tabs
 class TabBox extends StatelessWidget {
   TabBox();
 
@@ -28,8 +30,9 @@ class TabBox extends StatelessWidget {
   }
 }
 
+//the gridbox container as a stateless widget
 class GridBox extends StatelessWidget {
-  GridBox();
+  const GridBox();
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +52,13 @@ class GridItem extends StatefulWidget {
   const GridItem({Key? key, required this.index}) : super(key: key);
   final int index;
 
+//function for when button is pressed
+  void switchChanger(index) {
+    iotDB[index]['state'] as bool
+        ? iotDB[index]['state'] = true
+        : iotDB[index]['state'] = false;
+  }
+
   @override
   State<GridItem> createState() => _GridItem();
 }
@@ -57,15 +67,19 @@ class _GridItem extends State<GridItem> {
   @override
   Widget build(BuildContext context) {
     return Card(
-        child: Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(iotDB[widget.index]['icon'] as IconData, size: 40),
-        Text(iotDB[widget.index]['deviceName'] as String),
-        Icon(Icons.toggle_off)
-      ],
-    ));
+        child: ElevatedButton(
+            onPressed: null,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(iotDB[widget.index]['icon'] as IconData, size: 40),
+                Text(iotDB[widget.index]['deviceName'] as String),
+                Icon(iotDB[widget.index]['status'] as bool
+                    ? Icons.toggle_off
+                    : Icons.toggle_on)
+              ],
+            )));
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
-import 'griddb.dart';
 
 void main() {
   runApp(const IoTApp());

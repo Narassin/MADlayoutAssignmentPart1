@@ -6,7 +6,7 @@ var iotDB = [
   //item 2
   {'deviceName': 'Living Room Lights', 'icon': Icons.lightbulb, 'status': true},
   //item 3
-  {'deviceName': 'Studio Computer', 'icon': Icons.computer, 'status': true},
+  {'deviceName': 'Studio Computer', 'icon': Icons.computer, 'status': false},
   //item 4
   {
     'deviceName': 'Vacuum Bot',
