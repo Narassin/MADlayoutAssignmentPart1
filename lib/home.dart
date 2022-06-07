@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'griddb.dart';
-import 'package:flutter_grid_button/flutter_grid_button.dart';
+// import 'package:flutter_grid_button/flutter_grid_button.dart';
 
 //tab row widget to hold the tabs
 class TabBox extends StatelessWidget {
@@ -31,9 +31,14 @@ class TabBox extends StatelessWidget {
 }
 
 //the gridbox container as a stateless widget
-class GridBox extends StatelessWidget {
-  const GridBox();
+class GridBox extends StatefulWidget {
+  const GridBox({Key? key}) : super(key: key);
 
+  @override
+  State<GridBox> createState() => _GridBox();
+}
+
+class _GridBox extends State<GridBox> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -42,44 +47,99 @@ class GridBox extends StatelessWidget {
             crossAxisCount: 2,
             crossAxisSpacing: 10,
             childAspectRatio: 2.0,
-            children: List.generate(6, (index) {
-              return GridItem(key: key, index: index);
+            children: List.generate(iotDB.length, (index) {
+              return OutlinedButton(
+                  onPressed: () {
+                    setState(() =>
+                        iotDB.elementAt(index)['status'] as bool != true
+                            ? iotDB.elementAt(index)['status'] = true
+                            : iotDB.elementAt(index)['status'] = false);
+                    print(iotDB.elementAt(index)['status']);
+                    print(iotDB.elementAt(index)['deviceName']);
+                  },
+                  child: Card(
+                      margin: const EdgeInsets.all(0),
+                      elevation: 5.0,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(iotDB[index]['icon'] as IconData, size: 40),
+                          Text(iotDB[index]['deviceName'] as String),
+                          Icon(iotDB[index]['status'] as bool
+                              ? Icons.toggle_off
+                              : Icons.toggle_on)
+                        ],
+                      )));
             })));
   }
 }
 
-class GridItem extends StatefulWidget {
-  const GridItem({Key? key, required this.index}) : super(key: key);
-  final int index;
 
-//function for when button is pressed
-  void switchChanger(index) {
-    iotDB[index]['state'] as bool
-        ? iotDB[index]['state'] = true
-        : iotDB[index]['state'] = false;
-  }
 
-  @override
-  State<GridItem> createState() => _GridItem();
-}
 
-class _GridItem extends State<GridItem> {
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-        child: ElevatedButton(
-            onPressed: null,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(iotDB[widget.index]['icon'] as IconData, size: 40),
-                Text(iotDB[widget.index]['deviceName'] as String),
-                Icon(iotDB[widget.index]['status'] as bool
-                    ? Icons.toggle_off
-                    : Icons.toggle_on)
-              ],
-            )));
-  }
-}
+
+//fail attempt
+// //the gridbox container as a stateless widget
+// class GridBox extends StatelessWidget {
+//   const GridBox();
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Expanded(
+//         child: GridView.count(
+//             shrinkWrap: true,
+//             crossAxisCount: 2,
+//             crossAxisSpacing: 10,
+//             childAspectRatio: 2.0,
+//             children: List.generate(iotDB.length, (index) {
+//               return GridItem(key: key, index: index);
+//             })));
+//   }
+// }
+
+// class GridItem extends StatefulWidget {
+//   const GridItem({Key? key, required this.index}) : super(key: key);
+//   final int index;
+
+//   @override
+//   State<GridItem> createState() => _GridItem();
+// }
+
+// class _GridItem extends State<GridItem> {
+//   //function for when button is pressed
+
+//   // _toggleStatus(bool _powerStatus) {
+//   //   setState(() {
+//   //     if (_powerStatus) {
+//   //       _powerStatus = true;
+//   //     } else {
+//   //       _powerStatus = false;
+//   //     }
+//   //     print(_powerStatus);
+//   //   });
+//   // }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     bool _powerStatus = iotDB[widget.index]['status'] as bool;
+//     return GestureDetector(
+//         behavior: HitTestBehavior.translucent,
+//         onTap: () {
+//           _powerStatus = !_powerStatus;
+//         },
+//         child: Card(
+//             elevation: 5.0,
+//             child: Column(
+//               mainAxisSize: MainAxisSize.min,
+//               crossAxisAlignment: CrossAxisAlignment.center,
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               children: [
+//                 Icon(iotDB[widget.index]['icon'] as IconData, size: 40),
+//                 Text(iotDB[widget.index]['deviceName'] as String),
+//                 Icon(_powerStatus ? Icons.toggle_off : Icons.toggle_on)
+//               ],
+//             )));
+//   }
+// }
