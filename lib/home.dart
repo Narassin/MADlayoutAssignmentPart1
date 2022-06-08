@@ -48,30 +48,31 @@ class _GridBox extends State<GridBox> {
             crossAxisSpacing: 10,
             childAspectRatio: 2.0,
             children: List.generate(iotDB.length, (index) {
-              return OutlinedButton(
-                  onPressed: () {
-                    setState(() =>
-                        iotDB.elementAt(index)['status'] as bool != true
-                            ? iotDB.elementAt(index)['status'] = true
-                            : iotDB.elementAt(index)['status'] = false);
-                    print(iotDB.elementAt(index)['status']);
-                    print(iotDB.elementAt(index)['deviceName']);
-                  },
-                  child: Card(
-                      margin: const EdgeInsets.all(0),
-                      elevation: 5.0,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(iotDB[index]['icon'] as IconData, size: 40),
-                          Text(iotDB[index]['deviceName'] as String),
-                          Icon(iotDB[index]['status'] as bool
-                              ? Icons.toggle_off
-                              : Icons.toggle_on)
-                        ],
-                      )));
+              return Card(
+                  margin: const EdgeInsets.all(0),
+                  elevation: 5.0,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          setState(() =>
+                              iotDB.elementAt(index)['status'] as bool != true
+                                  ? iotDB.elementAt(index)['status'] = true
+                                  : iotDB.elementAt(index)['status'] = false);
+                          print(iotDB.elementAt(index)['status']);
+                          print(iotDB.elementAt(index)['deviceName']);
+                        },
+                        icon: Icon(iotDB[index]['icon'] as IconData, size: 40),
+                      ),
+                      Text(iotDB[index]['deviceName'] as String),
+                      Icon(iotDB[index]['status'] as bool
+                          ? Icons.toggle_off
+                          : Icons.toggle_on)
+                    ],
+                  ));
             })));
   }
 }
